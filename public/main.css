@@ -1,0 +1,33 @@
+.list-group-item:nth-child(odd){
+    background-color: #eee !important
+}
+
+html, body, #root, .section-container {
+    height: 100%
+}
+
+body{
+    background-color: #1b1b1b;
+}
+
+h1, legend{
+    color: white;
+}
+
+hr{
+    border-color:#b2b2b2;
+    margin-top: 0 !important; 
+}
+
+.ReactTable{
+    margin-top: 2%;
+    background-color:white
+}
+
+.ReactTable .rt-tr-group:nth-child(odd){
+    background-color: #eee ;
+    border: none;
+}
+#factsContainer{
+    padding: 0 15%;
+}
