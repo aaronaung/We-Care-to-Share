@@ -45,7 +45,9 @@ class TakeAction extends React.Component {
                 <div className="row">
                     <i hidden={this.props.fetchStatus.FETCHING_CHARITIES ? false: true} id="fetchingCharities" className="fa fa-spinner fa-spin"></i>
                     {this.props.charities.map( (charity) => {
+                       
                         return <CharityCard 
+                            fetching ={this.props.fetchStatus.FETCHING_CHARITIES}
                             imgUrl={charity.logoAbsoluteUrl}
                             charityName = {charity.name}
                             description = {charity.description}
