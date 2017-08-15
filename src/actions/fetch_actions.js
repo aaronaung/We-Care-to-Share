@@ -1,13 +1,16 @@
 import Axios from 'axios'; 
 
-const DOSOMETHING_API = "https://www.dosomething.org/api/v1/"
-const ORGHUNTER_API = "http://data.orghunter.com/v1/charitysearch"
-const ORGHUNTER_KEY = "bed3d56dc4481d875f8620ffaab43bd4"
+const DOSOMETHING_API = "https://www.dosomething.org/api/v1/";
+
+const JUSTGIVING_KEY = "cc562af4";
+const JUSTGIVING_API = `https://api.justgiving.com/${JUSTGIVING_KEY}/v1`;
 
 export const actionTypes = {
     FETCH_CATE_SUCCESS: "FETCH_CATE_SUCCESS",
     FETCH_FACTS_SUCCESS: "FETCH_FACTS_SUCCESS",
-    FETCH_ORGS_SUCCESS: "FETCH_ORGS_SUCCESS"
+    FETCH_CHARITY_CATE_SUCCESS: "FETCH_CHARITY_CATE_SUCCESS",
+    FETCH_CHARITIES_SUCCESS: "FETCH_CHARITIES_SUCCESS",
+    FETCHING_CHARITIES: "FETCHING_CHARITIES"
 }
 
 const fetchSuccess = (payload, fetchType)=>{
@@ -15,6 +18,16 @@ const fetchSuccess = (payload, fetchType)=>{
          type: fetchType,
          payload
      }
+}
+
+
+const updateFetchStatus =(statusType, fetching)=>{
+    var status = {};
+    status[statusType] = fetching;
+    return {
+        type: statusType,
+        payload: status
+    }
 }
 
 export const fetchCategories = () => {
@@ -33,11 +46,29 @@ export const fetchFacts = (categoryID) => {
     }
 }
 
-export const fetchOrganizations = (city, state, zip) => {
+export const fetchCharityCategories = () => {
     return (dispatch) => {
-        Axios.get(`${ORGHUNTER_API}?user_key=${ORGHUNTER_KEY}&city=${city}&state=${state}&zip=${zip}`)
-            .then( (response)=>dispatch(fetchSuccess(response.data, actionTypes.FETCH_ORGS_SUCCESS)))
-            .catch( (error) => console.log("FETCH ORGS ERROR: ", error));
+        Axios.get(`${JUSTGIVING_API}/charity/categories?format=json`)
+            .then( (response)=>dispatch(fetchSuccess(response.data, actionTypes.FETCH_CHARITY_CATE_SUCCESS)))
+            .catch( (error) => console.log("FETCH SEARCH CATEGORIES ERROR: ", error));
     }
 }
 
+export const fetchCharities = (categoryId , name) => {
+    return (dispatch) => {
+        dispatch(updateFetchStatus(actionTypes.FETCHING_CHARITIES, true));
+        Axios.get(`${JUSTGIVING_API}/charity/search?format=json&categoryid=${categoryId}&q=${name}`)
+            .then( (response) => {
+                //get more info about each charity by querying by id. 
+                var charityAjaxes = response.data.charitySearchResults.map( (charity) => {
+                    return Axios(`${JUSTGIVING_API}/charity/${charity.charityId}?format=json&pageSize=5`);
+                })
+
+                Axios.all(charityAjaxes).then((results)=> {
+                    let charities = results.map( result => result.data);
+                    dispatch(fetchSuccess(charities, actionTypes.FETCH_CHARITIES_SUCCESS));
+                    dispatch(updateFetchStatus(actionTypes.FETCHING_CHARITIES, false));
+                })
+            } )
+    }
+}

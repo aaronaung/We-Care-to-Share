@@ -11,6 +11,7 @@ class Selector extends React.Component{
 
     componentWillMount(){
         this.props.fetchCategories();
+        this.props.fetchCharityCategories();
     }
 
     onFormSubmit(event) {
@@ -56,6 +57,7 @@ const mapDispatchToProps = (dispatch)=>{
         //dispatch the (dispatch) function *object* returned by the action creator
         //Thunk allows you to dispatch function obj     ects.
         fetchFacts: (categoryID) => dispatch(fetchActions.fetchFacts(categoryID)), 
+        fetchCharityCategories : () => dispatch(fetchActions.fetchCharityCategories())
     }
 }
 

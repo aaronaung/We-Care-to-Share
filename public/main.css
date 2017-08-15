@@ -10,7 +10,7 @@ body{
     background-color: #1b1b1b;
 }
 
-h1, legend{
+h1, h2, legend{
     color: white;
 }
 
@@ -30,4 +30,32 @@ hr{
 }
 #factsContainer{
     padding: 0 15%;
+}
+
+.image {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 50%;
+}
+.image img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  max-height: 350px;
+  width: 100%;
+}
+
+.card-block{
+    height: 230px;
+    overflow-y: scroll;
+}
+
+#fetchingCharities{
+    font-size: 100px;
+    position: absolute;
+    top: 50%;
+    left: 48%;
 }

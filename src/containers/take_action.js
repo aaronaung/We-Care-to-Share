@@ -1,18 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import OrgTable from '../components/org_table';
-import { fetchOrganizations } from '../actions/fetch_actions';
+// import OrgTable from '../components/org_table';
+import { fetchCharities } from '../actions/fetch_actions';
+import CharityCard from "../components/charity_card"
 
 class TakeAction extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            city: "",
-            zip: "",
-            state: "",
+            name: "",
+            category: ""
         }
-        this.getOrganizations = this.getOrganizations.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
+        this.getCharities = this.getCharities.bind(this);
     }
 
     onInputChange(event, type){
@@ -21,52 +21,41 @@ class TakeAction extends React.Component {
         this.setState(changedObject);
     }
 
-    getOrganizations(event){
+    getCharities(event){
         event.preventDefault();
-        this.props.fetchOrganizations(this.state.city, this.state.state, this.state.zip)
-    }
-    
-    constructTableData(){
-        var organizations = this.props.organizations;
-        //var dataSet = [];
-        var dataSet = organizations.map( (org) => {
-            var data = {};
-            data['category'] = org.category;
-            data["name"] = <i>{org.charityName}</i>;
-            data["web"] = <a href={org.url}>Link to Website</a>;
-            data["donation"] =<a href={org.donationUrl}>Donate Here</a>;
-            data["tax"] = org.deductibilityCd === 1 ? <b>Yes</b> : <b>No</b>;
-            //dataSet.push(data);
-            return data;
-        })
-        return dataSet;
+        this.props.getCharities(this.state.category, this.state.name);
     }
 
     render() {
-        var hide = this.props.facts.length === 0;
-        var dataSet = this.constructTableData();
-        var stateArray = ["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC",  
-            "DE", "FL", "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA",  
-            "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE",  
-            "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC",  
-            "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"];
         return(
-            <div id="takeAction" hidden={hide} className="section-container container">
-                <h1 className="pt-5 pb-3">Do Something About It!</h1>
+            <div id="takeAction" hidden={0} className="section-container container">
+                <h2 className="pt-3 pb-3">Let's Do Something About It!</h2>
                 <hr/>
                 <form action="" className="form-inline">
-                    <input onChange={(e) => this.onInputChange(e,'city')} type="text" className="form-control mr-2" placeholder="City"/>
-                    <input onChange={(e) => this.onInputChange(e,'zip')} type="text" className="form-control mr-2" placeholder="Zip Code"/>
-                    <select onChange={(e) => this.onInputChange(e,'state')} className="form-control mr-2" name="" id="">
-                        <option value="">State</option>
-                        {stateArray.map((state) => {
-                            return <option value={state}>{state}</option>
+                    <input onChange={(e) => this.onInputChange(e,'name')} type="text" className="form-control mr-2" placeholder="Searches by charity name"/>
+                    <select onChange={(e) => this.onInputChange(e,'category')} className="form-control mr-2" name="" id="">
+                        <option value="">Select charity catagory</option>
+                        {this.props.charityCategories.map((category) => {
+                            return <option value={category.id}>{category.category}</option>
                         })}
                     </select>
-                    <button onClick={this.getOrganizations} className="btn-md btn-primary btn">Search for Organizations</button>
+                    <button onClick={this.getCharities} className="btn-md btn-primary btn">Search for charities</button>
                 </form>
 
-                <OrgTable data={dataSet} />
+                <div className="row">
+                    <i hidden={this.props.fetchStatus.FETCHING_CHARITIES ? false: true} id="fetchingCharities" className="fa fa-spinner fa-spin"></i>
+                    {this.props.charities.map( (charity) => {
+                        return <CharityCard 
+                            imgUrl={charity.logoAbsoluteUrl}
+                            charityName = {charity.name}
+                            description = {charity.description}
+                            webUrl = {charity.websiteUrl}
+                            donationUrl = {charity.profilePageUrl}
+                        />
+                    })}
+                </div>
+                
+                {/* <OrgTable data={dataSet} /> */}
             </div>
         );
     }
@@ -75,12 +64,16 @@ class TakeAction extends React.Component {
 const mapStateToProps = (state) => {
     return {
         facts : state.facts,
-        organizations: state.organizations
+        charityCategories: state.charityCategories,
+        charities: state.charities,
+        fetchStatus: state.fetchStatus
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return {fetchOrganizations: (city, state, zip ) =>  dispatch(fetchOrganizations(city, state, zip))}
+    return {
+        getCharities: (categoryId, name) => dispatch(fetchCharities(categoryId, name)) 
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TakeAction);
