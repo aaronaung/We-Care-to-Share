@@ -6,14 +6,9 @@ import Logger from 'redux-logger';
 import ReactDom from 'react-dom';
 import App from './components/app';
 import RootReducer from './reducers';
-import {actionTypes} from './actions/fetch_actions';
 
-var initialFetchState = {}
-initialFetchState[actionTypes.FETCHING_CHARITIES] = false;
-
-const initialState = {'fetchStatus': initialFetchState}
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(RootReducer,initialState, composeEnhancers(applyMiddleware(Thunk, Logger)));
+const store = createStore(RootReducer, composeEnhancers(applyMiddleware(Thunk, Logger)));
 
 const Root = ()=> {
     return (
