@@ -2,8 +2,8 @@ import Axios from 'axios';
 
 const DOSOMETHING_API = "https://www.dosomething.org/api/v1/";
 
-const JUSTGIVING_KEY = "cc562af4";
-const JUSTGIVING_API = `https://api.justgiving.com/${JUSTGIVING_KEY}/v1`;
+const GLOBALGIVING_KEY = "91c13488-b7d8-4b17-b8e8-60cb613b88e2";
+const GLOBALGIVING_API = `https://api.globalgiving.org/api/public`;
 
 export const actionTypes = {
     //FETCH SUCECSS ACTION TYPES
@@ -69,8 +69,8 @@ export const fetchFacts = (categoryID) => {
 
 export const fetchCharityCategories = () => {
     return (dispatch) => {
-        Axios.get(`${JUSTGIVING_API}/charity/categories?format=json`)
-            .then( (response)=>dispatch(fetchSuccess(response.data, actionTypes.FETCH_CHARITY_CATE_SUCCESS)))
+        Axios.get(`${GLOBALGIVING_API}/projectservice/themes?api_key=${GLOBALGIVING_KEY}`)
+            .then( (response)=>dispatch(fetchSuccess(response.data.themes.theme, actionTypes.FETCH_CHARITY_CATE_SUCCESS)))
             .catch( (error) => {
                 console.log("FETCH SEARCH CATEGORIES ERROR: ", error)
                 dispatch(fetchError(actionTypes.FETCH_CHARITY_CATE_ERRORS))
@@ -79,21 +79,27 @@ export const fetchCharityCategories = () => {
     }
 }
 
-export const fetchCharities = (categoryId , name) => {
+export const fetchCharities = (categoryId , country) => {
+    var category = categoryId === "" ? "" : `theme:${categoryId}`
+    var countryCode = country === "" ? "" : `country:${country}`
+    var query = `filter=${category},${countryCode}&q=*`
     return (dispatch) => {
         dispatch(updateFetchStatus(actionTypes.FETCHING_CHARITIES, true));
-        Axios.get(`${JUSTGIVING_API}/charity/search?format=json&categoryid=${categoryId}&q=${name}`)
+        Axios.get(`${GLOBALGIVING_API}/services/search/projects?api_key=${GLOBALGIVING_KEY}&${query}`)
             .then( (response) => {
-                //get more info about each charity by querying by id. 
-                var charityAjaxes = response.data.charitySearchResults.map( (charity) => {
-                    return Axios(`${JUSTGIVING_API}/charity/${charity.charityId}?format=json&pageSize=5`);
-                })
+                var data = response.data.search.response.numberFound === 0 ? [] : response.data.search.response.projects.project;
+                dispatch(fetchSuccess(data, actionTypes.FETCH_CHARITIES_SUCCESS));
+                dispatch(updateFetchStatus(actionTypes.FETCHING_CHARITIES, false));
+                // //get more info about each charity by querying by id. 
+                // var charityAjaxes = response.data.charitySearchResults.map( (charity) => {
+                //     return Axios(`${JUSTGIVING_API}/charity/${charity.charityId}?format=json&pageSize=5`);
+                // })
 
-                Axios.all(charityAjaxes).then((results)=> {
-                    let charities = results.map( result => result.data);
-                    dispatch(fetchSuccess(charities, actionTypes.FETCH_CHARITIES_SUCCESS));
-                    dispatch(updateFetchStatus(actionTypes.FETCHING_CHARITIES, false));
-                })
+                // Axios.all(charityAjaxes).then((results)=> {
+                //     let charities = results.map( result => result.data);
+                //     dispatch(fetchSuccess(charities, actionTypes.FETCH_CHARITIES_SUCCESS));
+                //     dispatch(updateFetchStatus(actionTypes.FETCHING_CHARITIES, false));
+                // })
             } )
             .catch( (errors) => {
                 dispatch(fetchError(actionTypes.FETCH_CHARITIES_ERROR))

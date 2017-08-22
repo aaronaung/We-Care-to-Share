@@ -14,8 +14,8 @@ class CharityCard extends React.Component{
                         <p className="card-text">{this.props.description}</p>
                     </div>
                     <div className="card-footer">
-                        <a href={this.props.webUrl} className="card-link">WebSite</a>
-                        <a href={this.props.donationUrl} className="card-link">Donation Link</a>
+                        {this.props.webUrl === "" ? "": <a href={this.props.webUrl} className="card-link">WebSite</a>}
+                        {this.props.donationUrl === "" ? "" : <a href={this.props.donationUrl} className="card-link">Donate</a>}
                     </div>
                 </div>
             </div>

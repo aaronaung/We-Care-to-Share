@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as fetchActions from "../actions/fetch_actions";
+import Axios from 'axios';
+
 
 class Selector extends React.Component{
     constructor(props){
@@ -10,6 +12,7 @@ class Selector extends React.Component{
     }
 
     componentWillMount(){
+        Axios.get('https://api.globalgiving.org/api/public/projectservice/all/projects/active?api_key=91c13488-b7d8-4b17-b8e8-60cb613b88e2').then( (response) => console.log(response))
         this.props.fetchCategories();
         this.props.fetchCharityCategories();
     }
