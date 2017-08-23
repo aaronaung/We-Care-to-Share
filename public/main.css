@@ -65,4 +65,8 @@ hr{
     html, body, #root, .section-container {
         height: auto !important;
     }
+
+    #takeAction{
+        padding-bottom: 400px;
+    }
 }

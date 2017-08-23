@@ -30,9 +30,10 @@ class TakeAction extends React.Component {
     }
 
     render() {
+        var hidden = this.props.facts.length === 0; 
         return(
             //hidden should be released once facts are generated.
-            <div id="takeAction" hidden={0} className="section-container container">
+            <div id="takeAction" hidden={hidden} className="section-container container">
                 <h2 className="pt-3 pb-3">Let's Do Something About It!</h2>
                 <hr/>
                 <form action="" className="form-inline">
