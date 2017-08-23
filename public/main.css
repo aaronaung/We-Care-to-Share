@@ -48,14 +48,55 @@ hr{
   width: 100%;
 }
 
-.card-block{
-    height: 230px;
+.card-description{
+    height: 250px;
     overflow-y: scroll;
 }
+
 
 #fetchingCharities{
     font-size: 100px;
     position: absolute;
     top: 50%;
     left: 48%;
+}
+
+#charities{
+    padding-bottom: 20px
+}
+
+.progress-bar{
+    height: 22px;
+    line-height: 22px
+}
+.progress-label{
+    line-height: 22px;
+    margin-right: 5px;
+    float: left;
+    font-style: italic;
+}
+
+#takeAction{
+    padding-bottom: 200px;
+}
+
+
+@media screen and (max-width: 450px){
+    html, body, #root, .section-container {
+        height: auto !important
+    }
+
+    #factsContainer{
+        padding: 0 30px;
+        padding-bottom: 40px;
+    }
+
+    .title{
+        font-size: 28px
+    }
+
+
+    .search{
+        width: 100%;
+    }
 }

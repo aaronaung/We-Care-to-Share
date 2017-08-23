@@ -32,12 +32,12 @@ class TakeAction extends React.Component {
     render() {
         return(
             //hidden should be released once facts are generated.
-            <div id="takeAction" hidden={0} className="section-container container">
-                <h2 className="pt-3 pb-3">Let's Do Something About It!</h2>
+            <div id="takeAction" hidden={this.props.facts.length === 0} className="section-container container">
+                <h2 className="title pt-5 pb-3">Let's do something about it</h2>
                 <hr/>
                 <form action="" className="form-inline">
                     <select onChange={(e) => this.onInputChange(e,'category')} className="form-control mr-2" name="" id="">
-                        <option value="">Select charity catagory</option>
+                        <option value="">Select a catagory</option>
                         {this.props.charityCategories.map((category) => {
                             return <option value={category.id}>{category.name}</option>
                         })}
@@ -48,10 +48,10 @@ class TakeAction extends React.Component {
                             return <option value={country.code}>{country.name}</option>
                         })}
                     </select>
-                    <button onClick={this.getCharities} className="btn-md btn-primary btn">Search for charities</button>
+                    <button onClick={this.getCharities} className="search btn-md btn-primary btn mr-2">Search for charities</button>
                 </form>
 
-                <div className="row">
+                <div className="row mb-5">
                     <i hidden={this.props.fetchStatus.FETCHING_CHARITIES ? false: true} id="fetchingCharities" className="fa fa-spinner fa-spin"></i>
                     
                     {this.props.charities.map( (charity) => {
@@ -61,6 +61,8 @@ class TakeAction extends React.Component {
                         var description = charity.summary === undefined ? "DESCRIPTION NOT PROVIDED": charity.summary;
                         var webUrl = charity.contactUrl === undefined? "" : charity.contactUrl;
                         var donationUrl = charity.projectLink === undefined? "": charity.projectLink;
+                        var goal = charity.goal === undefined? 0 : charity.goal;
+                        var funding = charity.funding === undefined? 0: charity.funding;
                        
                         return <CharityCard 
                             fetching ={this.props.fetchStatus.FETCHING_CHARITIES}
@@ -69,6 +71,8 @@ class TakeAction extends React.Component {
                             description = {description}
                             webUrl = {webUrl}
                             donationUrl = {donationUrl}
+                            funding = {funding}
+                            goal = {goal}
                         />
                     })}
                 </div>

@@ -7,7 +7,7 @@ const App = ()=>{
     return (
         <div style={{height: '100%'}}>
             <div id="factsContainer" className="container section-container">
-                <h1 className="text-center pt-4">Learn Something About the World</h1>
+                <h1 className="title text-center pt-4">Learn something about the world</h1>
                 <div className="row mt-4">
                     <Selector/>
                 </div>
