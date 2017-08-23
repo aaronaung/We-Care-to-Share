@@ -30,6 +30,7 @@ hr{
 }
 #factsContainer{
     padding: 0 15%;
+    padding-bottom: 20%;
 }
 
 .image {
@@ -58,4 +59,10 @@ hr{
     position: absolute;
     top: 50%;
     left: 48%;
+}
+
+@media screen and (max-width: 450px){
+    html, body, #root, .section-container {
+        height: auto !important;
+    }
 }
