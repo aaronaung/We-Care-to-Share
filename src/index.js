@@ -6,6 +6,7 @@ import Logger from 'redux-logger';
 import ReactDom from 'react-dom';
 import App from './components/app';
 import RootReducer from './reducers';
+import './css/main.css'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(RootReducer, composeEnhancers(applyMiddleware(Thunk, Logger)));

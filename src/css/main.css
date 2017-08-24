@@ -35,7 +35,7 @@ hr{
 
 #background{
     position: absolute;
-    background-image: url("background.jpg");
+    background-image: url("../img/background.jpg");
     background-size: cover;
     width: 100%;
     opacity: 0.3;
