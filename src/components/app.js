@@ -4,6 +4,7 @@ import FactList from '../containers/fact_list';
 import TakeAction from '../containers/take_action';
 import scrollToElement from 'scroll-to-element';
 import Info from './info_modal';
+import '../css/main.css';
 
 class App extends React.Component{
     scrollTop(event){
@@ -21,8 +22,7 @@ class App extends React.Component{
                 {/* <Info/> */}
                 
                 <div id="background"></div>
-                <Info />
-                <a href=""><i onClick={this.scrollTop} id="scrollTop" className="fa fa-angle-up fa-5x"></i></a>
+                
                 
                 <div id="factsContainer" className="container section-container">
                     <h1 className="title text-center pt-5">Learn something about the world</h1>
@@ -35,7 +35,10 @@ class App extends React.Component{
                         </div>
                     </div>
                 </div>
+
                 <TakeAction/>
+                <Info />
+                <a href=""><i onClick={this.scrollTop} id="scrollTop" className="fa fa-angle-up fa-5x"></i></a>
             </div>
         )
     }

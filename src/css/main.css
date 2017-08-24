@@ -36,18 +36,11 @@ hr{
 
 #background{
     position: absolute;
-    background-image: url("background.jpg");
+    background-image: url("../img/background.jpg");
     background-size: cover;
     width: 100%;
     opacity: 0.3;
     height: 100%;
-}
-
-#info{
-    color: #848484;
-    position: fixed;
-    left: 92%;
-    top: 5%;
 }
 
 .image {
@@ -71,7 +64,6 @@ hr{
     height: 250px;
     overflow-y: scroll;
 }
-
 
 #fetchingCharities{
     font-size: 100px;
@@ -99,11 +91,18 @@ hr{
     padding-bottom: 200px;
 }
 
+#info{
+    color: #848484;
+    position: fixed;
+    left: 7%;
+    top: 92%;
+}
+
 #scrollTop{
     color: #848484;
   	position: fixed;
-  	left: 92%;
-  	top: 85%;
+  	left: 90%;
+  	top: 90%;
 }
 
 #scrollTop:hover{
@@ -114,6 +113,12 @@ hr{
     color: white;
 }
 
+#developer-img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: 100% 10%;
+}
 
 @media screen and (max-width: 450px){
     html, body, #root, .section-container {
@@ -143,5 +148,12 @@ hr{
         font-size: 30px;
         z-index: 2;
         color: #eee
+    }
+
+    #fetchingCharities{
+        font-size: 70px;
+        position: absolute;
+        top: 65%;
+        left: 40%;
     }
 }
