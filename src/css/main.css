@@ -157,3 +157,10 @@ hr{
         left: 40%;
     }
 }
+
+@media (max-width: 767px) {
+    body {
+      padding-right: 0 !important;
+      padding-left: 0 !important;
+    }
+  }
