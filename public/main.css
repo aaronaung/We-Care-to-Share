@@ -28,9 +28,26 @@ hr{
     background-color: #eee ;
     border: none;
 }
+
 #factsContainer{
     padding: 0 15%;
     padding-bottom: 20%;
+}
+
+#background{
+    position: absolute;
+    background-image: url("background.jpg");
+    background-size: cover;
+    width: 100%;
+    opacity: 0.3;
+    height: 100%;
+}
+
+#info{
+    color: #848484;
+    position: fixed;
+    left: 92%;
+    top: 5%;
 }
 
 .image {
@@ -38,6 +55,7 @@ hr{
   overflow: hidden;
   padding-bottom: 50%;
 }
+
 .image img {
   position: absolute;
   top: 0;
@@ -49,10 +67,11 @@ hr{
   width: 100%;
 }
 
-.card-block{
-    height: 230px;
+.card-description{
+    height: 250px;
     overflow-y: scroll;
 }
+
 
 #fetchingCharities{
     font-size: 100px;
@@ -61,12 +80,68 @@ hr{
     left: 48%;
 }
 
+#charities{
+    padding-bottom: 20px
+}
+
+.progress-bar{
+    height: 22px;
+    line-height: 22px
+}
+.progress-label{
+    line-height: 22px;
+    margin-right: 5px;
+    float: left;
+    font-style: italic;
+}
+
+#takeAction{
+    padding-bottom: 200px;
+}
+
+#scrollTop{
+    color: #848484;
+  	position: fixed;
+  	left: 92%;
+  	top: 85%;
+}
+
+#scrollTop:hover{
+    color: white;
+}
+
+#info:hover{
+    color: white;
+}
+
+
 @media screen and (max-width: 450px){
     html, body, #root, .section-container {
-        height: auto !important;
+        height: auto !important
     }
 
-    #takeAction{
-        padding-bottom: 400px;
+    #scrollTop{
+        display:none;
+    }
+
+    #factsContainer{
+        padding: 0 30px;
+        padding-bottom: 40px;
+    }
+
+    .title{
+        font-size: 28px
+    }
+
+    .search{
+        width: 100%;
+    }
+
+    #info{
+        left: 90%;
+        top: 2%;
+        font-size: 30px;
+        z-index: 2;
+        color: #eee
     }
 }

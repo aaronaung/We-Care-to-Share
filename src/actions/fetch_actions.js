@@ -28,12 +28,6 @@ const fetchSuccess = (payload, fetchType)=>{
      }
 }
 
-const fetchError = (fetchType) => {
-    return{
-        type: fetchType,
-    }
-}
-
 const updateFetchStatus =(statusType, fetching)=>{
     var status = {};
     status[statusType] = fetching;
@@ -49,7 +43,7 @@ export const fetchCategories = () => {
             .then( (response) => dispatch(fetchSuccess(response.data, actionTypes.FETCH_CATE_SUCCESS)))
             .catch( (error) => {
                 console.log(error);
-                dispatch(fetchError(actionTypes.FETCH_CATE_ERROR));
+                //dispatch(updateFetchStatus(actionTypes.FETCH_CATE_ERROR));
                 throw error;
             });
     }
@@ -61,7 +55,7 @@ export const fetchFacts = (categoryID) => {
             .then( (response) => dispatch(fetchSuccess(response.data, actionTypes.FETCH_FACTS_SUCCESS)))
             .catch( (error) => {
                 console.log("FETCH FACTS ERROR: ", error);
-                dispatch(fetchError(actionTypes.FETCH_FACTS_ERROR));
+                //dispatch(updateFetchStatus(actionTypes.FETCH_FACTS_ERROR));
                 throw error;
             });
     }
@@ -73,7 +67,7 @@ export const fetchCharityCategories = () => {
             .then( (response)=>dispatch(fetchSuccess(response.data.themes.theme, actionTypes.FETCH_CHARITY_CATE_SUCCESS)))
             .catch( (error) => {
                 console.log("FETCH SEARCH CATEGORIES ERROR: ", error)
-                dispatch(fetchError(actionTypes.FETCH_CHARITY_CATE_ERRORS))
+                //dispatch(updateFetchStatus(actionTypes.FETCH_CHARITY_CATE_ERRORS))
                 throw error;
             });
     }
@@ -102,7 +96,7 @@ export const fetchCharities = (categoryId , country) => {
                 // })
             } )
             .catch( (errors) => {
-                dispatch(fetchError(actionTypes.FETCH_CHARITIES_ERROR))
+                dispatch(updateFetchStatus(actionTypes.FETCHING_CHARITIES, false));
                 throw errors; 
             })
     }

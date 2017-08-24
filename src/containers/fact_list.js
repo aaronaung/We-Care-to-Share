@@ -9,7 +9,7 @@ class FactList extends React.Component {
         var takeActionDiv = document.getElementById("takeAction");
         scrollToElement(takeActionDiv, {
             offset: 0,
-            duration: 1500
+            duration: 1300
         });
     }
 
