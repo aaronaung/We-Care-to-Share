@@ -21,9 +21,6 @@ class App extends React.Component{
                 {/* <Info/> */}
                 
                 <div id="background"></div>
-                <Info />
-                <a href=""><i onClick={this.scrollTop} id="scrollTop" className="fa fa-angle-up fa-5x"></i></a>
-                
                 <div id="factsContainer" className="container section-container">
                     <h1 className="title text-center pt-5">Learn something about the world</h1>
                     <div className="row mt-4">
@@ -36,6 +33,8 @@ class App extends React.Component{
                     </div>
                 </div>
                 <TakeAction/>
+                {/* <Info /> */}
+                <a href=""><i onClick={this.scrollTop} id="scrollTop" className="fa fa-angle-up fa-5x"></i></a>
             </div>
         )
     }
