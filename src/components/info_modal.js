@@ -36,7 +36,6 @@ class Info extends React.Component{
                         <Button>Close</Button>
                         <Button bsStyle="primary">Save changes</Button>
                     </Modal.Footer>
-
                 </Modal>
             </div>
         )
