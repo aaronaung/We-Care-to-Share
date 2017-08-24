@@ -32,6 +32,7 @@ class TakeAction extends React.Component {
     render() {
         return(
             //hidden should be released once facts are generated.
+            
             <div id="takeAction" hidden={this.props.facts.length === 0} className="section-container container">
                 <h2 className="title pt-5 pb-3">Let's do something about it</h2>
                 <hr/>
@@ -76,8 +77,6 @@ class TakeAction extends React.Component {
                         />
                     })}
                 </div>
-                
-                {/* <OrgTable data={dataSet} /> */}
             </div>
         );
     }

@@ -28,8 +28,25 @@ hr{
     background-color: #eee ;
     border: none;
 }
+
 #factsContainer{
     padding: 0 15%;
+}
+
+#background{
+    position: absolute;
+    background-image: url("background.jpg");
+    background-size: cover;
+    width: 100%;
+    opacity: 0.3;
+    height: 100%;
+}
+
+#info{
+    color: #848484;
+    position: fixed;
+    left: 92%;
+    top: 5%;
 }
 
 .image {
@@ -37,6 +54,7 @@ hr{
   overflow: hidden;
   padding-bottom: 50%;
 }
+
 .image img {
   position: absolute;
   top: 0;
@@ -80,10 +98,29 @@ hr{
     padding-bottom: 200px;
 }
 
+#scrollTop{
+    color: #848484;
+  	position: fixed;
+  	left: 92%;
+  	top: 85%;
+}
+
+#scrollTop:hover{
+    color: white;
+}
+
+#info:hover{
+    color: white;
+}
+
 
 @media screen and (max-width: 450px){
     html, body, #root, .section-container {
         height: auto !important
+    }
+
+    #scrollTop{
+        display:none;
     }
 
     #factsContainer{
@@ -95,8 +132,15 @@ hr{
         font-size: 28px
     }
 
-
     .search{
         width: 100%;
+    }
+
+    #info{
+        left: 90%;
+        top: 2%;
+        font-size: 30px;
+        z-index: 2;
+        color: #eee
     }
 }

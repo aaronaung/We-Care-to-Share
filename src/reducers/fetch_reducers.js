@@ -42,6 +42,8 @@ export const getFetchStatus = (state = {}, action) => {
     switch(action.type){
         case actionTypes.FETCHING_CHARITIES:
             return Object.assign( {} , state, action.payload);
+        case actionTypes.FETCH_CHARITIES_ERROR:
+            return Object.assign( {} , state, action.payload);
         default:
             return state;
     }

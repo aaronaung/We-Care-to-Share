@@ -54,8 +54,8 @@ class CharityCard extends React.Component{
                         </div>
                     </div>
                     <div className="card-footer">
-                        {this.props.webUrl === "" ? "": <a href={this.props.webUrl} className="card-link">Website</a>}
-                        {this.props.donationUrl === "" ? "" : <a href={this.props.donationUrl} className="card-link">Donate Now!</a>}
+                        {this.props.webUrl === "" ? "": <a target="_blank" href={this.props.webUrl} className="card-link">Visit Website</a>}
+                        {this.props.donationUrl === "" ? "" : <a target="_blank" href={this.props.donationUrl} className="card-link">Donate Now!</a>}
                     </div>
                 </div>
             </div>
