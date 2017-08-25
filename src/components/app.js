@@ -14,6 +14,7 @@ class App extends React.Component{
             offset: 0,
             duration: 1300
         });
+        return;
     }
 
     render(){
@@ -36,9 +37,10 @@ class App extends React.Component{
                     </div>
                 </div>
 
+                
+                <a href=""><i onClick={this.scrollTop} id="scrollTop" className="fa fa-arrow-circle-o-up fa-3x"></i></a>
                 <TakeAction/>
                 <Info />
-                <a href=""><i onClick={this.scrollTop} id="scrollTop" className="fa fa-angle-up fa-5x"></i></a>
             </div>
         )
     }
