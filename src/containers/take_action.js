@@ -10,8 +10,7 @@ class TakeAction extends React.Component {
         super(props);
         this.state = {
             category: "",
-            country: "",
-            emptyCharities: false
+            country: ""
         }
         this.onInputChange = this.onInputChange.bind(this);
         this.getCharities = this.getCharities.bind(this);
@@ -25,6 +24,7 @@ class TakeAction extends React.Component {
 
     getCharities(event){
         event.preventDefault();
+        this.setState({category: "", country: ""})
         this.props.getCharities(this.state.category, this.state.country);
         
     }
@@ -33,18 +33,18 @@ class TakeAction extends React.Component {
         var hidden = this.props.facts.length === 0; 
         return(
             //hidden should be released once facts are generated.
-            <div id="takeAction" hidden={0} className="section-container container">
+            <div id="takeAction" hidden={hidden} className="section-container container">
                 <h5 id="noCharities" hidden={!this.props.emptyCharities}><i className="fa fa-exclamation-circle mr-2"></i><i>No Charity Found</i></h5>
                 <h2 className="title pt-5 pb-3">Let's do something about it</h2>
                 <hr/>
                 <form action="" className="form-inline">
-                    <select onChange={(e) => this.onInputChange(e,'category')} className="form-control mr-2" name="" id="">
+                    <select value={this.state.category} onChange={(e) => this.onInputChange(e,'category')} className="form-control mr-2" name="" id="">
                         <option value="">Select a catagory</option>
                         {this.props.charityCategories.map((category) => {
                             return <option value={category.id}>{category.name}</option>
                         })}
                     </select>
-                    <select onChange={(e) => this.onInputChange(e,'country')} className="form-control mr-2" name="" id="">
+                    <select value={this.state.country} onChange={(e) => this.onInputChange(e,'country')} className="form-control mr-2" name="" id="">
                         <option value="">Select a country</option>
                         {countries.map((country) => {
                             return <option value={country.code}>{country.name}</option>

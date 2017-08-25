@@ -19,6 +19,7 @@ class Selector extends React.Component{
 
     onFormSubmit(event) {
         event.preventDefault();
+        this.setState({selected: ""})
         this.props.fetchFacts(this.state.selected);
     }
 
@@ -37,7 +38,7 @@ class Selector extends React.Component{
         let cateOptions = this.constructOptions();
         return(
             <form onSubmit={this.onFormSubmit} className="input-group" action="">
-                <select onChange= {(event) => this.setState({selected: event.target.value})} name="" id="" className="form-control">
+                <select value={this.state.selected} onChange= {(event) => this.setState({selected: event.target.value})} name="" id="" className="form-control">
                     {cateOptions}
                 </select>
                 <span className="input-group-btn">
