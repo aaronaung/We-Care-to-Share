@@ -135,7 +135,10 @@ hr{
     }
 
     #scrollTop{
-        display:none;
+        font-size: 50px;
+        left: 88%;
+        top: 90%;
+        color: #353535;
     }
 
     #factsContainer{
@@ -154,9 +157,9 @@ hr{
     #info{
         left: 90%;
         top: 2%;
-        font-size: 30px;
+        font-size: 25px;
         z-index: 2;
-        color: #eee
+        color: #717171
     }
 
     #fetchingCharities{

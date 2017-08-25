@@ -24,7 +24,7 @@ class Selector extends React.Component{
     }
 
     constructOptions(){
-        var defaultOption = <option key={-1} value="">Please select a category</option>
+        var defaultOption = <option key={-1} value="">Select a category</option>
         var categories = [defaultOption];
         if(this.props.categories.length !== 0){
             this.props.categories.map( (category) => categories.push(
