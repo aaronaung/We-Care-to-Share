@@ -33,7 +33,8 @@ class TakeAction extends React.Component {
         var hidden = this.props.facts.length === 0; 
         return(
             //hidden should be released once facts are generated.
-            <div id="takeAction" hidden={hidden} className="section-container container">
+            <div id="takeAction" hidden={0} className="section-container container">
+                <h5 id="noCharities" hidden={!this.props.emptyCharities}><i className="fa fa-exclamation-circle mr-2"></i><i>No Charity Found</i></h5>
                 <h2 className="title pt-5 pb-3">Let's do something about it</h2>
                 <hr/>
                 <form action="" className="form-inline">
@@ -49,7 +50,7 @@ class TakeAction extends React.Component {
                             return <option value={country.code}>{country.name}</option>
                         })}
                     </select>
-                    <button onClick={this.getCharities} className="search btn-md btn-primary btn mr-2">Search for charities</button>
+                    <button disabled={this.props.fetchStatus.FETCHING_CHARITIES} onClick={this.getCharities} className="search btn-md btn-primary btn mr-2">Search for charities</button>
                 </form>
 
                 <div className="row mb-5">
@@ -87,7 +88,8 @@ const mapStateToProps = (state) => {
         facts : state.facts,
         charityCategories: state.charityCategories,
         charities: state.charities,
-        fetchStatus: state.fetchStatus
+        fetchStatus: state.fetchStatus,
+        emptyCharities: state.emptyCharities
     }
 }
 

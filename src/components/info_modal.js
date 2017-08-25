@@ -29,7 +29,7 @@ class Info extends React.Component{
                                 <button type="button" className="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div className="modal-body">
-                                <p>All data displayed on the website is rightfully pulled from <a target="_blank" href="https://www.globalgiving.org"><i>Global Giving, Inc.</i> </a> and 
+                                <p>All data displayed on the website is pulled from <a target="_blank" href="https://www.globalgiving.org"><i>Global Giving, Inc.</i> </a> and 
                                 <a href="https://www.dosomething.org" target="_blank"><i> Do Something, Inc.</i> </a></p>
                                 <div className="card">
                                     

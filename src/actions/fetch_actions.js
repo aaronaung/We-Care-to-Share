@@ -18,10 +18,11 @@ export const actionTypes = {
     FETCH_CHARITY_CATE_ERRORS: "FETCH_CHARITY_CATE_ERROR",
     FETCH_CHARITIES_ERROR: "FETCH_CHARITIES_ERROR",
 
-    FETCHING_CHARITIES: "FETCHING_CHARITIES"
+    FETCHING_CHARITIES: "FETCHING_CHARITIES",
+    EMPTY_CHARITIES: "EMPTY_CHARITIES"
 }
 
-const fetchSuccess = (payload, fetchType)=>{
+const dispatchAction = (fetchType, payload)=>{
      return {
          type: fetchType,
          payload
@@ -40,7 +41,7 @@ const updateFetchStatus =(statusType, fetching)=>{
 export const fetchCategories = () => {
     return (dispatch) => {
          Axios.get(`${DOSOMETHING_API}terms`)
-            .then( (response) => dispatch(fetchSuccess(response.data, actionTypes.FETCH_CATE_SUCCESS)))
+            .then( (response) => dispatch(dispatchAction(actionTypes.FETCH_CATE_SUCCESS, response.data)))
             .catch( (error) => {
                 console.log(error);
                 //dispatch(updateFetchStatus(actionTypes.FETCH_CATE_ERROR));
@@ -52,7 +53,7 @@ export const fetchCategories = () => {
 export const fetchFacts = (categoryID) => {
     return (dispatch) => {
         Axios.get(`${DOSOMETHING_API}campaigns?term_ids=${categoryID}&random=true&count=4&cache=false`)
-            .then( (response) => dispatch(fetchSuccess(response.data, actionTypes.FETCH_FACTS_SUCCESS)))
+            .then( (response) => dispatch(dispatchAction(actionTypes.FETCH_FACTS_SUCCESS,response.data)))
             .catch( (error) => {
                 console.log("FETCH FACTS ERROR: ", error);
                 //dispatch(updateFetchStatus(actionTypes.FETCH_FACTS_ERROR));
@@ -64,7 +65,7 @@ export const fetchFacts = (categoryID) => {
 export const fetchCharityCategories = () => {
     return (dispatch) => {
         Axios.get(`${GLOBALGIVING_API}/projectservice/themes?api_key=${GLOBALGIVING_KEY}`)
-            .then( (response)=>dispatch(fetchSuccess(response.data.themes.theme, actionTypes.FETCH_CHARITY_CATE_SUCCESS)))
+            .then( (response)=>dispatch(dispatchAction(actionTypes.FETCH_CHARITY_CATE_SUCCESS, response.data.themes.theme)))
             .catch( (error) => {
                 console.log("FETCH SEARCH CATEGORIES ERROR: ", error)
                 //dispatch(updateFetchStatus(actionTypes.FETCH_CHARITY_CATE_ERRORS))
@@ -82,22 +83,15 @@ export const fetchCharities = (categoryId , country) => {
         Axios.get(`${GLOBALGIVING_API}/services/search/projects?api_key=${GLOBALGIVING_KEY}&${query}`)
             .then( (response) => {
                 var data = response.data.search.response.numberFound === 0 ? [] : response.data.search.response.projects.project;
-                dispatch(fetchSuccess(data, actionTypes.FETCH_CHARITIES_SUCCESS));
+                dispatch(dispatchAction(actionTypes.FETCH_CHARITIES_SUCCESS, data));
                 dispatch(updateFetchStatus(actionTypes.FETCHING_CHARITIES, false));
-                // //get more info about each charity by querying by id. 
-                // var charityAjaxes = response.data.charitySearchResults.map( (charity) => {
-                //     return Axios(`${JUSTGIVING_API}/charity/${charity.charityId}?format=json&pageSize=5`);
-                // })
-
-                // Axios.all(charityAjaxes).then((results)=> {
-                //     let charities = results.map( result => result.data);
-                //     dispatch(fetchSuccess(charities, actionTypes.FETCH_CHARITIES_SUCCESS));
-                //     dispatch(updateFetchStatus(actionTypes.FETCHING_CHARITIES, false));
-                // })
+                data.length === 0 ? dispatch(dispatchAction(actionTypes.EMPTY_CHARITIES,true)): dispatch(dispatchAction(actionTypes.EMPTY_CHARITIES,false));
             } )
             .catch( (errors) => {
                 dispatch(updateFetchStatus(actionTypes.FETCHING_CHARITIES, false));
-                throw errors; 
+                dispatch(dispatchAction(actionTypes.FETCH_CHARITIES_ERROR, []));
+                dispatch(dispatchAction(actionTypes.EMPTY_CHARITIES, true));
+                throw errors.response; 
             })
     }
 }

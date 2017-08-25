@@ -7,7 +7,8 @@ const rootReducer = combineReducers(
         facts: fetchReducers.fetchFacts,
         charityCategories: fetchReducers.fetchCharityCategories,
         charities: fetchReducers.fetchCharities,
-        fetchStatus: fetchReducers.getFetchStatus
+        fetchStatus: fetchReducers.getFetchStatus,
+        emptyCharities: fetchReducers.emptyCharitySearch
     }
 )
 

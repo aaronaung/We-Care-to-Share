@@ -33,6 +33,8 @@ export const fetchCharities = (state = [] , action) => {
     switch(action.type){
         case actionTypes.FETCH_CHARITIES_SUCCESS:
             return action.payload;
+        case actionTypes.FETCH_CHARITIES_ERROR:
+            return [];
         default:
             return state;
     }
@@ -46,5 +48,16 @@ export const getFetchStatus = (state = {}, action) => {
             return Object.assign( {} , state, action.payload);
         default:
             return state;
+    }
+}
+
+export const emptyCharitySearch = (state = false, action) =>{
+    switch(action.type){
+        case actionTypes.FETCH_CHARITIES_ERROR:
+            return action.payload;
+        case actionTypes.EMPTY_CHARITIES:
+            return action.payload; 
+        default:
+            return false;
     }
 }

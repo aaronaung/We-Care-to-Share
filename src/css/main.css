@@ -69,7 +69,8 @@ hr{
     font-size: 100px;
     position: absolute;
     top: 50%;
-    left: 48%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 #charities{
@@ -94,15 +95,15 @@ hr{
 #info{
     color: #848484;
     position: fixed;
-    left: 7%;
-    top: 92%;
+    left: 95%;
+    top: 5%;
 }
 
 #scrollTop{
     color: #848484;
   	position: fixed;
-  	left: 90%;
-  	top: 90%;
+  	left: 94.5%;
+  	top: 87.5%;
 }
 
 #scrollTop:hover{
@@ -118,6 +119,14 @@ hr{
     height: 200px;
     object-fit: cover;
     object-position: 100% 10%;
+}
+
+#noCharities{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #8a8a8a;
+    transform: translateX(-50%);
 }
 
 @media screen and (max-width: 450px){
@@ -154,13 +163,16 @@ hr{
         font-size: 70px;
         position: absolute;
         top: 65%;
-        left: 40%;
+        left: 50%;
+        transform: translateX(-50%);
     }
-}
 
-@media (max-width: 767px) {
-    body {
-      padding-right: 0 !important;
-      padding-left: 0 !important;
+    #noCharities{
+        position: absolute;
+        top: 65%;
+        left: 50%;
+        color: #8a8a8a;
+        transform: translateX(-50%);
     }
-  }
+
+}

@@ -33,7 +33,7 @@ class CharityCard extends React.Component{
                             <div className="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                 <div className="progress">
                                     <div className="progress-bar w-100" role="progressbar" aria-valuenow={this.props.goal} aria-valuemin="0" aria-valuemax={this.props.goal}>
-                                        ${this.props.goal}
+                                        ${this.props.goal.toLocaleString("en-US")}
                                     </div>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@ class CharityCard extends React.Component{
                             <div className="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                 <div className="progress">
                                     <div className={`progress-bar ${fundingBg}`} style={{width: `${fundingPercentile}%`}} role="progressbar" aria-valuenow={this.props.goal} aria-valuemin="0" aria-valuemax={this.props.goal}>
-                                        ${this.props.funding}
+                                        ${this.props.funding.toLocaleString("en-US")}
                                     </div>
                                 </div>
                             </div>
