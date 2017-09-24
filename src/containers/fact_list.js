@@ -4,9 +4,9 @@ import {connect} from 'react-redux';
 import scrollToElement from 'scroll-to-element';
 
 class FactList extends React.Component {
-    scrollToTakeAction(event){
+    scrollToFeatured(event){
         event.preventDefault();
-        var takeActionDiv = document.getElementById("takeAction");
+        var takeActionDiv = document.getElementById("featured");
         scrollToElement(takeActionDiv, {
             offset: 0,
             duration: 1300
@@ -27,10 +27,10 @@ class FactList extends React.Component {
                 <hr hidden={hide}/>
                 <ul className="list-group mt-3 p-0">
                     {nonEmptyFacts.map( (entry)=> {
-                        return <FactItem  fact={entry.facts.problem} />;
+                        return <FactItem key={entry.id} fact={entry.facts.problem} />;
                     })}
                 </ul>
-                <button onClick={this.scrollToTakeAction} hidden={hide} className="btn btn-success btn-lg form-control mt-3">Take Action!</button>
+                <button onClick={this.scrollToFeatured} hidden={hide} className="btn btn-success btn-lg form-control mt-3">Take Action!</button>
             </div>
         )
     }

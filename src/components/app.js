@@ -4,6 +4,7 @@ import FactList from '../containers/fact_list';
 import TakeAction from '../containers/take_action';
 import scrollToElement from 'scroll-to-element';
 import Info from './info_modal';
+import FeaturedCarousel from "../containers/featured_carousel";
 import '../css/main.css';
 
 class App extends React.Component{
@@ -24,9 +25,8 @@ class App extends React.Component{
                 
                 <div id="background"></div>
                 
-                
                 <div id="factsContainer" className="container section-container">
-                    <h1 className="title text-center pt-5">Learn something about the world</h1>
+                    <h1 className="title text-center pt-4">Learn Something about the World</h1>
                     <div className="row mt-4">
                         <Selector/>
                     </div>
@@ -36,8 +36,7 @@ class App extends React.Component{
                         </div>
                     </div>
                 </div>
-
-                
+                <FeaturedCarousel/>
                 <a href=""><i onClick={this.scrollTop} id="scrollTop" className="fa fa-arrow-circle-o-up fa-3x"></i></a>
                 <TakeAction/>
                 <Info />

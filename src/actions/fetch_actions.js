@@ -11,6 +11,7 @@ export const actionTypes = {
     FETCH_FACTS_SUCCESS: "FETCH_FACTS_SUCCESS",
     FETCH_CHARITY_CATE_SUCCESS: "FETCH_CHARITY_CATE_SUCCESS",
     FETCH_CHARITIES_SUCCESS: "FETCH_CHARITIES_SUCCESS",
+    FETCH_FEATURED_SUCCESS: "FETCH_FEATURED_SUCCESS",
 
     //FETCH ERROR ACTION TYPES
     FETCH_CATE_ERROR: "FETCH_CATE_ERROR",
@@ -92,6 +93,19 @@ export const fetchCharities = (categoryId , country) => {
                 dispatch(dispatchAction(actionTypes.FETCH_CHARITIES_ERROR, []));
                 dispatch(dispatchAction(actionTypes.EMPTY_CHARITIES, true));
                 throw errors.response; 
+            })
+    }
+}
+
+export const fetchFeatured = ()=> {
+    return (dispatch) => {
+        Axios.get(`${GLOBALGIVING_API}/projectservice/featured/projects?api_key=${GLOBALGIVING_KEY}`)
+            .then((response) => {
+                var data = response.data.projects.numberFound === 0 ? [] : response.data.projects.project;
+                dispatch(dispatchAction(actionTypes.FETCH_FEATURED_SUCCESS, data));
+            })
+            .catch((error) => {
+                console.log(error);
             })
     }
 }

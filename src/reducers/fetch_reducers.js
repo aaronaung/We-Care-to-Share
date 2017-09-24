@@ -61,3 +61,12 @@ export const emptyCharitySearch = (state = false, action) =>{
             return false;
     }
 }
+
+export const fetchFeatured = (state = [], action) => {
+    switch(action.type){
+        case actionTypes.FETCH_FEATURED_SUCCESS:
+            return action.payload;
+        default:
+            return state;
+    }
+}

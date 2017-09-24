@@ -31,7 +31,7 @@ class CharityCard extends React.Component{
                                 <h6 className= "progress-label">Goal</h6> 
                             </div>
                             <div className="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                <div className="progress">
+                                <div title={`$${this.props.goal.toLocaleString("en-US")}`} className="progress">
                                     <div className="progress-bar w-100" role="progressbar" aria-valuenow={this.props.goal} aria-valuemin="0" aria-valuemax={this.props.goal}>
                                         ${this.props.goal.toLocaleString("en-US")}
                                     </div>
@@ -45,7 +45,7 @@ class CharityCard extends React.Component{
                                 <h6 className= "progress-label">Funding</h6> 
                             </div>
                             <div className="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                <div className="progress">
+                                <div title={`$${this.props.funding.toLocaleString("en-US")}`} className="progress">
                                     <div className={`progress-bar ${fundingBg}`} style={{width: `${fundingPercentile}%`}} role="progressbar" aria-valuenow={this.props.goal} aria-valuemin="0" aria-valuemax={this.props.goal}>
                                         ${this.props.funding.toLocaleString("en-US")}
                                     </div>
