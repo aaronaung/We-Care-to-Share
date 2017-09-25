@@ -38,7 +38,7 @@ class TakeAction extends React.Component {
                 <hr/>
                 <form action="" className="form-inline">
                     <select value={this.state.category} onChange={(e) => this.onInputChange(e,'category')} className="form-control mr-2" name="" id="">
-                        <option value="">Select a catagory</option>
+                        <option value="">Select a category</option>
                         {this.props.charityCategories.map((category) => {
                             return <option key={category.id} value={category.id}>{category.name}</option>
                         })}

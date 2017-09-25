@@ -80,8 +80,7 @@ hr{
     font-size: 100px;
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 43%;
 }
 
 #charities{
@@ -208,8 +207,8 @@ hr{
         font-size: 70px;
         position: absolute;
         top: 65%;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 43%;
+        
     }
 
     #noCharities{
