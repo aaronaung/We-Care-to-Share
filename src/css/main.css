@@ -232,6 +232,7 @@ hr{
         margin:auto;
         background: rgba(58,58,58,0.8);
         padding: 15px;
+        transform: translateY(0%);
     }
 
     .carousel-caption .btn{
